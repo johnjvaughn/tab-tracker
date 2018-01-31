@@ -1,0 +1,22 @@
+[
+  {
+    "title":"Night Train (song)",
+    "artist":"Oscar Peterson",
+    "genre":"Jazz",
+    "album":"Night Train",
+    "albumImageUrl":"https://upload.wikimedia.org/wikipedia/en/6/6e/Oscarnighttrain.jpg",
+    "youtubeId":"WDCbfZxRg48",
+    "lyrics":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac tempus mi, ut posuere sem. Vestibulum cursus massa vel nunc finibus tempus. Donec scelerisque ante ac risus tempus, sed molestie mi dictum. Ut faucibus laoreet lacus nec scelerisque. Vivamus non consectetur enim. Nam eu ex consectetur, sodales nulla ut, cursus sapien. Fusce elementum ornare eros, in malesuada est fermentum eu. Duis molestie ex id tincidunt imperdiet.",
+    "tab":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac tempus mi, ut posuere sem. Vestibulum cursus massa vel nunc finibus tempus. Donec scelerisque ante ac risus tempus, sed molestie mi dictum. Ut faucibus laoreet lacus nec scelerisque. Vivamus non consectetur enim. Nam eu ex consectetur, sodales nulla ut, cursus sapien. Fusce elementum ornare eros, in malesuada est fermentum eu. Duis molestie ex id tincidunt imperdiet."
+  },
+  {
+    "title":"Artistry Jumps",
+    "artist":"Stan Kenton",
+    "genre":"Big Band Jazz",
+    "album":"Kenton in Hi-Fi",
+    "albumImageUrl":"https://images.eil.com/large_image/STAN_KENTON_KENTON%2BIN%2BHI-FI%2B-%2B1ST-444297.jpg",
+    "youtubeId":"Y_4UdLw3r9M",
+    "lyrics":"no lyrics (instrumental)",
+    "tab":"still not sure what tabs are"
+  }
+]
