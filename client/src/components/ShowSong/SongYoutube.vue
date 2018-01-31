@@ -13,14 +13,7 @@
 export default {
   props: [
     'youtubeId'
-  ],
-  methods: {
-    youtubeLink () {
-      return 'https://www.youtube.com/watch?v=' + this.youtubeId
-    }
-  },
-  components: {
-  }
+  ]
 }
 </script>
 

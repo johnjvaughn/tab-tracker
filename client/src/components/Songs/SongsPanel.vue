@@ -17,7 +17,7 @@
           <v-btn
             dark
             class="cyan"
-            @click="navigateTo({name: 'song', params: {id: song.id}})">
+            :to="{name: 'song', params: {id: song.id}}">
             View
           </v-btn>
         </v-flex>
@@ -33,9 +33,9 @@
       medium
       middle
       light
+      fab
       class="cyan accent-2"
-      @click="navigateTo({name: 'songs-new'})"
-      fab>
+      :to="{name: 'songs-new'}">
       <v-icon>add</v-icon>
     </v-btn>
   </panel>
@@ -44,16 +44,9 @@
 <script>
 import SongsService from '@/services/SongsService'
 export default {
-  components: {
-  },
   data () {
     return {
       songs: null
-    }
-  },
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
     }
   },
   async mounted () {
