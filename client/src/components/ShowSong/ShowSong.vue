@@ -54,8 +54,7 @@ export default {
     this.song = (await SongsService.show(id)).data
     if (this.isUserLoggedIn) {
       SongHistoryService.create({
-        songId: id,
-        userId: this.user.id
+        songId: id
       })
     }
   }

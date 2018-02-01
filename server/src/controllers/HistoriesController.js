@@ -1,15 +1,12 @@
 const {
   History,
-  Song,
-  User
+  Song
 } = require('../models')
-const _ = require('lodash')
 
 module.exports = {
   async index (req, res) {
     try {
-      const {userId} = req.query
-      let findHistory = {UserId: userId}
+      const userId = req.user.id
       const histories = await History.findAll({
         where: {
           UserId: userId
@@ -20,7 +17,7 @@ module.exports = {
           }
         ]
       }).map(history => history.toJSON())
-        .map(history => _.extend(
+        .map(history => Object.assign(
           {},
           history.Song,
           history
@@ -34,14 +31,13 @@ module.exports = {
   },
   async create (req, res) {
     try {
-      const {songId, userId} = req.body
+      const userId = req.user.id
+      const {songId} = req.body
       const newHistory = {
         SongId: songId,
         UserId: userId
       }
-      const histories = await History.destroy({
-        where: newHistory
-      })
+      await History.destroy({ where: newHistory })
       const returnHistory = await History.create(newHistory)
       res.send(returnHistory)
     } catch (err) {

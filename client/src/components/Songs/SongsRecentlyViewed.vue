@@ -41,8 +41,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'isUserLoggedIn',
-      'user'
+      'isUserLoggedIn'
     ])
   },
   async mounted () {
@@ -51,7 +50,6 @@ export default {
     }
     try {
       this.histories = (await SongHistoryService.index({
-        userId: this.user.id
       })).data
     } catch (err) {
       console.log(err)

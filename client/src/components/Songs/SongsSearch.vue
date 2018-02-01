@@ -8,7 +8,6 @@
 </template>
 
 <script>
-// import SongsService from '@/services/SongsService'
 import _ from 'lodash'
 export default {
   components: {

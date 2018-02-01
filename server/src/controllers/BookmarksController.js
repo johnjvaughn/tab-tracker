@@ -1,17 +1,16 @@
 const {
   Bookmark,
-  Song,
-  User
+  Song
 } = require('../models')
-const _ = require('lodash')
 
 module.exports = {
   async index (req, res) {
     try {
-      const {songId, userId} = req.query
+      const userId = req.user.id
+      const {songId} = req.query
       let findBookmark = {UserId: userId}
       if (songId) {
-        findBookmark = _.extend({SongId: songId})
+        Object.assign(findBookmark, {SongId: songId})
       }
       const bookmarks = await Bookmark.findAll({
         where: findBookmark,
@@ -21,7 +20,7 @@ module.exports = {
           }
         ]
       }).map(bookmark => bookmark.toJSON())
-        .map(bookmark => _.extend(
+        .map(bookmark => Object.assign(
           {},
           bookmark.Song,
           bookmark
@@ -35,7 +34,8 @@ module.exports = {
   },
   async create (req, res) {
     try {
-      const {songId, userId} = req.body
+      const userId = req.user.id
+      const {songId} = req.body
       const newBookmark = {
         SongId: songId,
         UserId: userId
@@ -58,8 +58,19 @@ module.exports = {
   },
   async destroy (req, res) {
     try {
+      const userId = req.user.id
       const {id} = req.params
-      const bookmark = await Bookmark.findOne({where: {id: id}})
+      const bookmark = await Bookmark.findOne({
+        where: {
+          id: id,
+          UserId: userId
+        }
+      })
+      if (!bookmark) {
+        return res.status(403).send({
+          error: 'You do not have access to delete this bookmark.'
+        })
+      }
       await bookmark.destroy()
       res.send(bookmark)
     } catch (err) {
