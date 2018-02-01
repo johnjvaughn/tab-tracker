@@ -39,6 +39,9 @@ module.exports = {
         SongId: songId,
         UserId: userId
       }
+      const histories = await History.destroy({
+        where: newHistory
+      })
       const returnHistory = await History.create(newHistory)
       res.send(returnHistory)
     } catch (err) {
