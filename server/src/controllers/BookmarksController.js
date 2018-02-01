@@ -6,10 +6,11 @@ module.exports = {
       const {songId, userId} = req.query
       const bookmark = await Bookmark.findOne({
         where: {
-          SongId : songId,
-          UserId : userId
+          SongId: songId,
+          UserId: userId
         }
       })
+      console.log('bookmark', bookmark)
       res.send(bookmark)
     } catch (err) {
       res.status(500).send({
@@ -19,9 +20,21 @@ module.exports = {
   },
   async create (req, res) {
     try {
-      const bookmark = req.query
-      await Bookmark.create(bookmark)
-      res.send(bookmark)
+      const {songId, userId} = req.body
+      const newBookmark = {
+        SongId: songId,
+        UserId: userId
+      }
+      const bookmark = await Bookmark.findOne({
+        where: newBookmark
+      })
+      if (bookmark) {
+        return res.status(400).send({
+          error: 'You already have this set as a bookmark.'
+        })
+      }
+      const returnBookmark = await Bookmark.create(newBookmark)
+      res.send(returnBookmark)
     } catch (err) {
       res.status(500).send({
         error: 'An error has occurred trying to add bookmark.'
@@ -40,5 +53,4 @@ module.exports = {
       })
     }
   }
-
 }

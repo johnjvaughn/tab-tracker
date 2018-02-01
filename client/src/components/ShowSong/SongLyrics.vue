@@ -11,9 +11,7 @@
 export default {
   props: [
     'song'
-  ],
-  components: {
-  }
+  ]
 }
 </script>
 

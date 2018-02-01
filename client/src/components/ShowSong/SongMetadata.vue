@@ -14,8 +14,22 @@
         <v-btn
           dark
           class="cyan"
-          @click="navigateTo({name: 'song-edit', params: {id: song.id}})">
+          :to="{name: 'song-edit', params: {id: song.id}}">
           Edit
+        </v-btn>
+        <v-btn
+          v-if="isUserLoggedIn && !bookmark"
+          dark
+          class="cyan"
+          @click="setBookmark">
+          Bookmark
+        </v-btn>
+        <v-btn
+          v-if="isUserLoggedIn && bookmark"
+          dark
+          class="cyan"
+          @click="unsetBookmark">
+          Unbookmark
         </v-btn>
       </v-flex>
       <v-flex xs6>
@@ -30,16 +44,54 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import BookmarksService from '@/services/BookmarksService'
 export default {
   props: [
     'song'
   ],
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+  data () {
+    return {
+      bookmark: null
     }
   },
-  components: {
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  async mounted () {
+    if (!this.isUserLoggedIn) {
+      return
+    }
+    try {
+      this.bookmark = (await BookmarksService.index({
+        songId: this.song.id,
+        userId: this.$store.state.user.id
+      })).data
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  methods: {
+    async setBookmark () {
+      try {
+        this.bookmark = (await BookmarksService.create({
+          songId: this.song.id,
+          userId: this.$store.state.user.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async unsetBookmark () {
+      try {
+        await BookmarksService.delete(this.bookmark.id)
+        this.bookmark = null
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 }
 </script>

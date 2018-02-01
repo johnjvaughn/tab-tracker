@@ -42,9 +42,6 @@
 <script>
 export default {
   methods: {
-    // navigateTo (route) {
-    //   this.$router.push(route)
-    // },
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
