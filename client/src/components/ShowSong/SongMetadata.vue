@@ -65,10 +65,13 @@ export default {
       return
     }
     try {
-      this.bookmark = (await BookmarksService.index({
+      const bookmarks = (await BookmarksService.index({
         songId: this.song.id,
         userId: this.$store.state.user.id
       })).data
+      if (bookmarks.length) {
+        this.bookmark = bookmarks[0]
+      }
     } catch (err) {
       console.log(err)
     }
